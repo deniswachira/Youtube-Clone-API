@@ -4,13 +4,13 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoute = require('./routes/auth');
 const videoRoute = require('./routes/videos');
+const userRoute = require('./routes/users');
 const cookieParser = require('cookie-parser');
 
 //middlewares
 app.use(cookieParser())
 app.use(express.json());
 dotenv.config();
-// app.use(cookieParser());
 
 mongoose.set('strictQuery',false);
 mongoose.connect(process.env.MONGO_URL, {
@@ -22,6 +22,7 @@ mongoose.connect(process.env.MONGO_URL, {
 
 app.use("/auth", authRoute);
 app.use("/videos", videoRoute);
+app.use("/user", userRoute);
 
 app.listen(process.env.PORT || 5000, () => {
     console.log('Server running on port 5000');
